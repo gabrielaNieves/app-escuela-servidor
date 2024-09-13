@@ -1,0 +1,45 @@
+const { Sequelize, DataTypes } = require('sequelize');
+const config = require('../config/config.js');
+
+const sequelize = new Sequelize(
+  config.development.database,
+  config.development.username,
+  config.development.password,
+  {
+    host: config.development.host,
+    dialect: 'mysql',
+  }
+);
+
+try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+
+  const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+db.Usuario = require('./usuario.js')(sequelize, DataTypes);
+db.Estudiante = require('./estudiante.js')(sequelize, DataTypes);
+db.Profesor = require('./profesor.js')(sequelize, DataTypes);
+db.Curso = require('./curso.js')(sequelize, DataTypes);
+db.Inscripcion = require('./Inscripcion.js')(sequelize, DataTypes);
+db.Rol = require('./rol.js')(sequelize, DataTypes);
+
+// Relaciones
+db.Profesor.hasMany(db.Course, { foreignKey: 'profesorId' });
+db.Curso.belongsTo(db.Teacher, { foreignKey: 'profesorId' });
+
+db.Estudiante.belongsToMany(db.Curso, { through: db.Enrollment, foreignKey: 'estudianteId' });
+db.Curso.belongsToMany(db.Estudiante, { through: db.Enrollment, foreignKey: 'cursoId' });
+
+db.Usuario.hasMany(db.Inscripcion, { foreignKey: 'usuarioId' });
+db.Inscripcion.belongsTo(db.Usuario, { foreignKey: 'usuarioId' });
+
+db.Rol.hasMany(db.Usuario, { foreignKey: 'rolId' });
+db.Usuario.belongsTo(db.Rol, { foreignKey: 'rolId' });
+
+module.exports = db;
