@@ -29,14 +29,19 @@ app.use(express.json());
 app.use(cookieParser());
 
 const userRoutes = require('./routes/usersRoutes.js');
-
+const cursoRoutes = require('./routes/cursoRoutes.js');
+const docenteRoutes = require('./routes/docenteRoutes.js');
+const estudianteRoutes = require('./routes/estudianteRoutes.js');
 
 app.get('/', (req, res) => {
     res.send('App enviando datos');
 });
 
 
-app.use('/usuarios', userRoutes)
+app.use('/usuarios', userRoutes);
+app.use('/cursos', cursoRoutes);
+app.use('/docentes', docenteRoutes);
+app.use('/estudiantes', estudianteRoutes);
 
 app.use(verificarJWT);
 app.get('/adminBoard', (req, res) => {
