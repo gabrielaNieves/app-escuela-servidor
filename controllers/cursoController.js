@@ -1,4 +1,4 @@
-const { Curso } = require('../models');
+const { Curso, Docente } = require('../models');
 
 // Crear un nuevo curso
 exports.createCurso = async (req, res) => {
@@ -13,7 +13,13 @@ exports.createCurso = async (req, res) => {
 // Obtener todos los cursos
 exports.getAllCursos = async (req, res) => {
   try {
-    const cursos = await Curso.findAll();
+    const cursos = await Curso.findAll({
+      include: {
+        model: Docente,
+        attributes: ['nombre', 'apellido']
+
+      }
+    });
     res.status(200).json(cursos);
   } catch (error) {
     res.status(500).json({ error: error.message });

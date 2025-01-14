@@ -32,6 +32,8 @@ const userRoutes = require('./routes/usersRoutes.js');
 const cursoRoutes = require('./routes/cursoRoutes.js');
 const docenteRoutes = require('./routes/docenteRoutes.js');
 const estudianteRoutes = require('./routes/estudianteRoutes.js');
+const inscripcionRoutes = require('./routes/inscripcionRoutes.js');
+const adminRoutes = require('./routes/adminRoutes.js');
 
 app.get('/', (req, res) => {
     res.send('App enviando datos');
@@ -42,6 +44,8 @@ app.use('/usuarios', userRoutes);
 app.use('/cursos', cursoRoutes);
 app.use('/docentes', docenteRoutes);
 app.use('/estudiantes', estudianteRoutes);
+app.use('/inscripciones', inscripcionRoutes);
+app.use('/inicio', adminRoutes);
 
 app.use(verificarJWT);
 app.get('/adminBoard', (req, res) => {
