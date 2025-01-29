@@ -41,7 +41,7 @@ exports.buscarInscripciones = async (req, res) => {
       where: whereConditions,
       include: [
         { model: Estudiante, attributes: ['id', 'nombre', 'apellido', 'genero'] },
-        { model: Curso, attributes: ['id', 'titulo']}
+        { model: Curso, attributes: ['id', 'grado', 'seccion']}
       ]
     });
 
@@ -59,7 +59,7 @@ exports.buscarInscripcionPorId = async (req, res) => {
     const inscripcion = await Inscripcion.findByPk(id, {
       include: [
         { model: Estudiante, attributes: ['id', 'nombre', 'apellido'] },
-        { model: Curso, attributes: ['id', 'titulo'] }
+        { model: Curso, attributes: ['id', 'grado', 'seccion'] }
       ]
     });
 

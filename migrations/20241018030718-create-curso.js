@@ -9,9 +9,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      titulo: {
+      grado: {
         type: Sequelize.STRING,
-      
+        allowNull: false
+      },
+      seccion: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       docenteId: {
         type: Sequelize.INTEGER,

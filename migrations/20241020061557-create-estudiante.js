@@ -16,7 +16,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       cedula: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true
       },
       genero: {
         type: Sequelize.STRING

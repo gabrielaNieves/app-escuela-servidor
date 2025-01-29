@@ -77,7 +77,7 @@ const registroUsuario = async (req, res) => {
 
 const obtenerUsuarios = async (req, res) => {
   try {
-    const usuariosLista = await Usuario.findAll({ attributes: ['id', 'nombre', 'usuario', 'rolId'] });
+    const usuariosLista = await Usuario.findAll({ attributes: ['id', 'nombre', 'apellido', 'usuario', 'rolId'] });
 
     res.status(200).json(usuariosLista);
   } catch (error) {

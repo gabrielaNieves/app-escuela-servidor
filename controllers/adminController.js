@@ -28,7 +28,7 @@ exports.obtenerTotalInscripcion = async (req, res) => {
       const { count , rows } = await Inscripcion.findAndCountAll({
         include: [
           { model: Estudiante, attributes: ['id', 'nombre', 'apellido', 'genero'] },
-          { model: Curso, attributes: ['id', 'titulo'] }
+          { model: Curso, attributes: ['id', 'grado', 'seccion'] }
         ],
         limit: 5,
         order: [['id', 'DESC']]
