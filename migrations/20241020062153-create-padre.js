@@ -17,8 +17,7 @@ module.exports = {
       },
       cedula: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true
+        allowNull: false
       },
       fechaDeNacimiento: {
         type: Sequelize.DATEONLY
@@ -30,6 +29,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       direccion: {
+        type: Sequelize.STRING
+      },
+      telefono: {
         type: Sequelize.STRING
       },
       relacion: {

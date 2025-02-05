@@ -13,6 +13,15 @@ exports.crearInscripcion = async (req, res) => {
     if (!estudiante) return res.status(404).json({ error: 'Estudiante no encontrado' });
     if (!curso) return res.status(404).json({ error: 'Curso no encontrado' });
 
+    // Verificar si el estudiante ya está inscrito en el curso
+    const inscripcionExistente = await Inscripcion.findOne({
+      where: { estudianteId, cursoId },
+    });
+
+    if (inscripcionExistente) {
+      return res.status(400).json({ message: "El estudiante ya está inscrito en este curso." });
+    }
+    
     // Crear la inscripción
     const inscripcion = await Inscripcion.create({
       estudianteId,

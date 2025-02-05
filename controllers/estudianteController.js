@@ -6,6 +6,13 @@ exports.crearEstudiante = async (req, res) => {
   const { nombre, apellido, cedula, genero, nacionalidad, fechaDeNacimiento, lugarDeNacimiento, Padres } = req.body;
 
   try {
+    // Verificar si el estudiante ya existe por su cédula
+    const estudianteExistente = await Estudiante.findOne({ where: { cedula } });
+
+    if (estudianteExistente) {
+      return res.status(400).json({ message: "Este estudiante ya está registrado." });
+    }
+
     // Crear el estudiante
     const estudiante = await Estudiante.create({
       nombre,
